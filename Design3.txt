@@ -8,9 +8,9 @@
 
 >> Fill in the names of your group members.
 
-FirstName LastName
-FirstName LastName
-FirstName LastName
+Jared Wolfe
+Jie Zheng
+Fubin Luan
 
 ---- PRELIMINARIES ----
 
@@ -20,6 +20,8 @@ FirstName LastName
 >> Please cite any offline or online sources you consulted while
 >> preparing your submission, other than the Pintos documentation, course
 >> text, lecture notes, and course staff.
+
+https://github.com/ChristianJHughes/pintos-project3
 
 			PAGE TABLE MANAGEMENT
 			=====================
