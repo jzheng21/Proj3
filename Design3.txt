@@ -97,7 +97,7 @@ If a mapped file is not in a list for a thread, the page is managed in the same 
 
 If a memory mapped file experiences page fault or eviction, it is either a) written to disk if it is dirty, or
 b) evicted without using the swap functionality available for other pages.
-It would not make sense to duplicate the memory mapped file in the swap partition sense we know it exists in physical memory
+It would not make sense to duplicate the memory mapped file in the swap partition since we know it exists in physical memory
 on the disk.
 
 >> C3: Explain how you determine whether a new file mapping overlaps
