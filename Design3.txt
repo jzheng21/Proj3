@@ -54,9 +54,27 @@ This ensures only one process can obtain the lock at a time to allocate a new fr
 >> B1: When a frame is required but none is free, some frame must be
 >> evicted.  Describe the algorithm used to choose a frame to evict.
 
+Answer:	when we trying to get frame allocation and lock it, we will first try to fine a free frame spot first,
+if no free frame exist, we trying to find a frame and try to evict it. for this processes we loop though the whole
+frames twice , we can start at any position at the frames. first see if we can acquire a lock for current frame if we 
+cannot, we skip this, and then check if the current frame's page is NULL, if it is, we replace the page we want to have 
+a frame to the NULL page, and we release the lock we acquired before, and we return that frame. if not such NULL page, we 
+check if the page for such frame is recently accessed, if it is we just release the lock and skip this frame. if both 
+above condition failed, we release the scan lock first, and then we trying to evict that frame. since we already call
+a lock for current frame, we just call the page_out for current frame's page. if it can be evict out. we set the page for 
+current frame to the page passed in, and return current frame. if it cannot be evict out we release the frame lock we required 
+before and return NULL.
+
+
 >> B2: Explain your heuristic for deciding whether a page fault for an
 >> invalid virtual address should cause the stack to be extended into
 >> the page that faulted.
+
+Answer: we know that the size of the stack space is 1MB. and we need to ensure that the given address is within this space. so
+we check the "(p.addr > PHYS_BASE - STACK_MAX)" and also we can get the stack pointer through the call with thread_current()->
+User_esp. we can check if the address is valid if it is within 32 bytes of this stack pointer. so we check
+"((void *)thread_current()->user_esp - 32 < address)". if both of them are hold we can safely allocate another page on the stack.
+
 
 			 MEMORY MAPPED FILES
 			 ===================
