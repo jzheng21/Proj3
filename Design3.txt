@@ -31,7 +31,7 @@ https://github.com/ChristianJHughes/pintos-project3
 >> A1: In a few paragraphs, describe the existing code for locating the
 >> frame, if any, that contains the data of a given page.
 
-A page struct contains information about it's user virtual address and its page frame. The frame for this page contains
+A page struct contains information about its user virtual address and its page frame. The frame for this page contains
 a pointer to the kernal virtual address for accessing its data, as well as a pointer referencing the page it belongs to.
 A page does not recieve a frame (physical memory) until the function frame_alloc_and_lock() is called for it. This function
 is responsible for finding a free frame for this page.  It iterates through all of the frames, checking for a free one.  It
@@ -44,7 +44,7 @@ this method is updated to contain a reference to the newly allocated frame.
 >> how are races avoided?
 
 A lock called scan_lock is initialized in the creation of the frame manager.
-This ensures only one process can obtain the lock at a time to insert a new frame.
+This ensures only one process can obtain the lock at a time to allocate a new frame.
 
 		       PAGING TO AND FROM DISK
 		       =======================
