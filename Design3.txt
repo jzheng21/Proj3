@@ -36,6 +36,9 @@ https://github.com/ChristianJHughes/pintos-project3
 >> A2: When two user processes both need a new frame at the same time,
 >> how are races avoided?
 
+A lock called scan_lock is initialized in the creation of the frame manager.
+This ensures only one process can obtain the lock at a time to insert a new frame.
+
 		       PAGING TO AND FROM DISK
 		       =======================
 
