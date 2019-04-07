@@ -73,6 +73,15 @@ This ensures only one process can obtain the lock at a time to allocate a new fr
 >> memory subsystem.  Explain how the page fault and eviction
 >> processes differ between swap pages and other pages.
 
+In syscall.c, a mapping struct is responsible for binding a mapping id to a file and a location in memory.  Every thread
+contains a list of the files which belong to it. This allows us to determine which files are available directly from memory.
+If a mapped file is not in a list for a thread, the page is managed in the same way any other page is.
+
+If a memory mapped file experiences page fault or eviction, it is either a) written to disk if it is dirty, or
+b) evicted without using the swap functionality available for other pages.
+It would not make sense to duplicate the memory mapped file in the swap partition sense we know it exists in physical memory
+on the disk.
+
 >> C3: Explain how you determine whether a new file mapping overlaps
 >> any existing segment.
 
