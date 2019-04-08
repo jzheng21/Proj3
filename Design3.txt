@@ -103,6 +103,10 @@ on the disk.
 >> C3: Explain how you determine whether a new file mapping overlaps
 >> any existing segment.
 
+Page_allocated() function allows us to determine whether the space for new 
+file mapping is occupied or not. The process of allocating new file mapping 
+will fail if the space is occupied.
+
 ---- RATIONALE ----
 
 >> C4: Mappings created with "mmap" have similar semantics to those of
@@ -111,6 +115,10 @@ on the disk.
 >> that much of their implementation can be shared.  Explain why your
 >> implementation either does or does not share much of the code for
 >> the two situations.
+
+Much of our implementation does share much of the code since both situations
+ use the same method, page_out(). What seperates them in our implementation is 
+ when the page is marked as private and then it should be swapped to swap partition.
 
 			   SURVEY QUESTIONS
 			   ================
