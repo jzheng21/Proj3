@@ -166,6 +166,11 @@ page_out (struct page *p)
  to write this page to the disk!*/
 dirty = pagedir_is_dirty (p->thread->pagedir, (const void *) p->addr);
 
+// if the frame is not modified, ok set to true
+if(!dirty)
+{
+  ok = true;
+}
   /* Write frame contents to disk if necessary. */
 
 /* add code here */
